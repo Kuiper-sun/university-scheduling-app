@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University Scheduling App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <img src="{{ url_for('static', filename='computer.jpg') }}" alt="Computer">
+        <h1 class="app-name">OptiCourse</h1>
+        <h1>Welcome to the University Course Scheduling Optimization Project!</h1>
+        <p>Simplifying university course scheduling through smart, data-driven solutions. Click "Upload Data" and "Start Optimization" to see how we optimize professor assignments and enhance academic efficiency.</p>
+        <form action="/process-data" method="post" enctype="multipart/form-data">
+            <!-- Adjust the text on the file input button -->
+            <label for="data_file" class="custom-file-upload">
+                <input type="file" id="data_file" name="data_file" accept=".csv, .xls, .xlsx" onchange="updateFileName()">
+                <span id="file_name">Upload Data</span>
+            </label>
+            <button type="submit">Start Optimization</button>
+        </form>
+        <hr>
+        <p>Alternatively, you can start with default data:</p>
+        <form action="/import-data" method="post">
+            <button type="submit">START with Default Data</button>
+        </form>
+    </div>
+
+    <script>
+        function updateFileName() {
+            const input = document.getElementById('data_file');
+            const fileName = input.files[0].name;
+            document.getElementById('file_name').textContent = fileName;
+        }
+    </script>
+</body>
+</html>
