@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+        }
+        table, th, td {
+            border: 1px solid maroon;
+            padding: 0.5em;
+            text-align: center;
+        }
+        th {
+            background-color: maroon;
+            color: white;
+        }
+        td {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1em 2em;
+            background-color: maroon;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1em;
+        }
+
+        .btn:hover {
+            background-color: rgba(128, 29, 29, 0.87);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+            margin-top: 1em;
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1em;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script>
+        function generatePDF() {
+            const element = document.querySelector('.container');
+            html2pdf().from(element).save('algorithm_results.pdf');
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Algorithm Execution Steps</h1>
+        <ol>
+            {% for step in steps %}
+                <li>{{ step }}</li>
+            {% endfor %}
+        </ol>
+
+        {% if error %}
+        <h2>Error</h2>
+        <p>{{ error }}</p>
+        {% endif %}
+
+        {% if schedule %}
+        <h1>Course Schedules</h1>
+        {% set courses = schedule | groupby('course') %}
+        {% for course, course_schedule in courses %}
+            <h2>{{ course }}</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Professor</th>
+                        <th>Timeslot</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for entry in course_schedule %}
+                    <tr>
+                        <td>{{ entry.professor }}</td>
+                        <td>{{ entry.timeslot }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <hr>
+        {% endfor %}
+        {% endif %}
+
+        {% if search_process %}
+        <h2>Branch and Bound Process Visualization</h2>
+        <div style="overflow-x: auto;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Depth</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for action, depth, details in search_process %}
+                    <tr>
+                        <td>{{ action }}</td>
+                        <td>{{ depth }}</td>
+                        <td>{{ details }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+        <div class="button-container">
+            <a href="/" class="btn">Back to Home Page</a>
+            
+            <button class="btn" onclick="generatePDF()">Save as PDF</button>
+            <a href="/download-csv" class="btn">Save as CSV</a>
+        </div>
+    </div>
+</body>
+</html>
