@@ -1,0 +1,93 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("background.jpg");
+    background-size: cover;
+    margin: 0;
+    overflow: auto; /* Enable scrolling */
+}
+
+.container {
+    background: white;
+    padding: 2em;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 600px;
+    margin: 50px auto; /* Adjust margin for centering */
+    color: black;
+}
+
+.container img {
+    max-width: 150px;
+    margin-bottom: 1em;
+}
+
+.container h1, .container h2 {
+    font-size: 1.5em;
+    margin-bottom: 0.5em;
+    color: maroon;
+}
+
+.container p {
+    font-size: 1em;
+    margin-bottom: 1em;
+    color: black;
+}
+
+.container button {
+    padding: 1em 2em;
+    font-size: 1em;
+    background-color: maroon;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.container button:hover {
+    background-color: rgba(128, 29, 29, 0.87);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2em;
+}
+
+table, th, td {
+    border: 1px solid maroon;
+}
+
+th, td {
+    padding: 0.5em;
+    text-align: center;
+}
+
+hr {
+    border: 0;
+    border-top: 2px solid maroon;
+    margin: 2em 0;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+.app-name {
+    font-size: 3em; /* Adjust font size as needed */
+    font-weight: bold;
+    margin-top: 0.5em; /* Adjust margin-top to separate from logo */
+    font-family: 'Arial', sans-serif; /* Replace with your preferred font */
+    color: maroon; /* Example: Change color to maroon */
+}
